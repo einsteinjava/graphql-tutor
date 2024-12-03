@@ -1,0 +1,40 @@
+export const typeDefs = `#graphql
+  type Game{
+    id: ID!
+    title: String!
+    platform: [String]!
+    reviews: [Review]
+  }
+  type Review{
+    id: ID!
+    rating: Int!
+    content: String!
+    game: Game!
+    author: Author!
+  }
+  type Author{
+    id: ID!
+    name: String!
+    verified: Boolean!
+    reviews: [Review]
+  }
+  type Query{
+    reviews: [Review]!
+    review(id: ID!): Review
+    games: [Game]!
+    game(id: ID!): Game
+    authors: [Author]!
+    author(id: ID!): Author
+  }
+  input ReviewInput{
+    rating: Int!
+    content: String!
+    game_id: ID!
+    author_id: ID!
+  }
+  type Mutation{
+    createReview(input: ReviewInput!): Review
+    deleteReview(id: ID!): Review
+    updateReview(id: ID!, input: ReviewInput!): Review
+  }
+`;
